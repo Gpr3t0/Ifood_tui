@@ -72,17 +72,5 @@ Endereços e restaurantes sempre usam as mesmas regiões pré-listadas, facilita
 
 ---
 
-## ✅ O que já está pronto
-
-- Login e cadastro separados para cliente e restaurante.
-- Menu completo para cada perfil.
-- Cadastro de pratos com estoque.
-- Endereços com apelidos + número, baseados em regiões pré-definidas.
-- Pedido completo (carrinho, endereço, pagamento, registro e status).
-- Favoritos, histórico, listagem por distância.
-- Horários com preenchimento rápido e personalização opcional.
-
----
-
 Qualquer ajuste de texto, novas regiões ou regras diferentes podem ser feitos direto nos arquivos `.c` e `.h`.😄
 
