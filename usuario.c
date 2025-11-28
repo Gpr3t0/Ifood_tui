@@ -106,42 +106,42 @@ int fazerLogin(TipoUsuario tipo, Usuario *usuario) {
 }
 
 void cadastrarUsuario(TipoUsuario tipo){
-  Usuario novo;
+    Usuario novo;
 
-  printf("====================  CADASTRO  ====================\n");
-  printf("Nome: ");
-  limparBufferEntrada();
-  lerString(novo.nome, MAX_NOME);
+    printf("====================  CADASTRO  ====================\n");
+    printf("Nome: ");
+    limparBufferEntrada();
+    lerString(novo.nome, MAX_NOME);
 
-  printf("Email: ");
-  scanf("%s", novo.email);
-  printf("Senha: ");
-  scanf("%s", novo.senha);
+    printf("Email: ");
+    scanf("%s", novo.email);
+    printf("Senha: ");
+    scanf("%s", novo.senha);
 
-  novo.tipo = tipo;
-  novo.id = gerarProximoId("usuarios.dat", sizeof(Usuario));
+    novo.tipo = tipo;
+    novo.id = gerarProximoId("usuarios.dat", sizeof(Usuario));
 
-  if(tipo == RESTAURANTE) {
-      printf("\nSelecione a localidade do restaurante:\n");
-      int indice = escolherIndiceLocalidade(0);
-      definirEnderecoPadrao(&novo.enderecoPrincipal, "S/N", LOCALIDADES[indice].nome);
-  } else {
-      novo.enderecoPrincipal.rua[0] = '\0';
-      novo.enderecoPrincipal.numero[0] = '\0';
-      novo.enderecoPrincipal.bairro[0] = '\0';
-      novo.enderecoPrincipal.cidade[0] = '\0';
-  }
+    if(tipo == RESTAURANTE) {
+        printf("\nSelecione a localidade do restaurante:\n");
+        int indice = escolherIndiceLocalidade(0);
+        definirEnderecoPadrao(&novo.enderecoPrincipal, "S/N", LOCALIDADES[indice].nome);
+    } else {
+        novo.enderecoPrincipal.rua[0] = '\0';
+        novo.enderecoPrincipal.numero[0] = '\0';
+        novo.enderecoPrincipal.bairro[0] = '\0';
+        novo.enderecoPrincipal.cidade[0] = '\0';
+    }
 
   FILE *arquivo = fopen("usuarios.dat", "ab");
-  if(arquivo == NULL){
+    if(arquivo == NULL){
     printf("Erro ao salvar usuario!\n");
     return;
-  }
+    }
 
-  fwrite(&novo, sizeof(Usuario), 1, arquivo);
-  fclose(arquivo);
+    fwrite(&novo, sizeof(Usuario), 1, arquivo);
+    fclose(arquivo);
 
-  printf("Usuario cadastrado com sucesso!\n");
+    printf("Usuario cadastrado com sucesso!\n");
 }
 
 static void limparBufferEntrada(void) {
@@ -409,11 +409,11 @@ static void exibirCarrinho(const ItemCarrinho *carrinho, int totalItens) {
     for(i = 0; i < totalItens; i++) {
         float subtotal = carrinho[i].quantidade * carrinho[i].produto.preco;
         printf("%-4d | %-27s | %-4d | R$ %6.2f | R$ %7.2f\n",
-               carrinho[i].produto.id,
-               carrinho[i].produto.nome,
-               carrinho[i].quantidade,
-               carrinho[i].produto.preco,
-               subtotal);
+                carrinho[i].produto.id,
+                carrinho[i].produto.nome,
+                carrinho[i].quantidade,
+                carrinho[i].produto.preco,
+                subtotal);
     }
     printf("-----------------------------------------------------------------\n");
     printf("Total: R$ %.2f\n", calcularTotalCarrinho(carrinho, totalItens));
@@ -656,12 +656,12 @@ static void listarEnderecosCliente(int idCliente) {
     while(fread(&salvo, sizeof(EnderecoSalvo), 1, arquivo)) {
         encontrou = 1;
         printf("%-2d | %-7s | %s, %s - %s, %s\n",
-               salvo.id,
-               salvo.apelido,
-               salvo.endereco.rua,
-               salvo.endereco.numero,
-               salvo.endereco.bairro,
-               salvo.endereco.cidade);
+            salvo.id,
+            salvo.apelido,
+            salvo.endereco.rua,
+            salvo.endereco.numero,
+            salvo.endereco.bairro,
+            salvo.endereco.cidade);
     }
 
     if(!encontrou) {
@@ -864,16 +864,16 @@ static void listarRestaurantesProximos(Usuario *cliente) {
 
     printf("\nRestaurantes proximos ao endereco selecionado:\n");
     printf("Base: %s, %s - %s, %s\n",
-           referencia.rua, referencia.numero, referencia.bairro, referencia.cidade);
+            referencia.rua, referencia.numero, referencia.bairro, referencia.cidade);
     printf("\nID | Nome                         | Localidade    | Dist (km)\n");
     printf("-------------------------------------------------------------\n");
 
     for(i = 0; i < total; i++) {
         printf("%-2d | %-27s | %-13s | %6.2f\n",
-               lista[i].restaurante.id,
-               lista[i].restaurante.nome,
-               lista[i].restaurante.enderecoPrincipal.bairro,
-               lista[i].distanciaKm);
+            lista[i].restaurante.id,
+            lista[i].restaurante.nome,
+            lista[i].restaurante.enderecoPrincipal.bairro,
+            lista[i].distanciaKm);
     }
 
     pausar();
